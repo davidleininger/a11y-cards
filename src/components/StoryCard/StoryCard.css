@@ -1,0 +1,125 @@
+/* -------------------- Story Group -------------------- */
+.story + .story {
+  border-top: 1px solid var(--stroke, #ccc);
+  margin-top: var(--gap, 24px);
+  padding-top: var(--gap, 24px);
+}
+
+/* -------------------- Card Contents -------------------- */
+.card {
+  display: flex;
+  flex-direction: column-reverse;
+  position: relative;
+}
+.card-content {
+  @media (min-width: 765px) {
+    /* float image placeholder */
+    &::before {
+      content: "";
+      clear: right;
+      display: block;
+      float: right;
+      height: 75px;
+      margin: 0 0 5px 15px;
+      width: 75px;
+    }
+    &::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+  }
+}
+.title {
+  font-feature-settings: "kern";
+  font-family: nyt-cheltenham, georgia, "times new roman", times, serif;
+  font-size: 1.4375rem;
+  font-weight: 700;
+  line-height: 1.6875rem;
+  margin-bottom: 7px;
+  & a {
+    color: var(--content-base, #121212);
+    text-decoration: none;
+  }
+  & a:hover {
+    text-decoration: underline;
+  }
+  & a::after {
+    content: '';
+    inset: 0;
+    position: absolute;
+  }
+}
+
+/* if the summary is visible, the title should be a heading */
+.title.heading {
+  display: block;
+  @media (min-width: 765px) {
+    display: none;
+  }
+  @media (min-width: 1020px) {
+    display: block;
+  }
+}
+.title.text {
+  display: none;
+  @media (min-width: 765px) {
+    display: block;
+  }
+  @media (min-width: 1020px) {
+    display: none;
+  }
+}
+
+.thumbnail {
+  display: none;
+  @media (min-width: 765px) {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: -1;
+  }
+}
+
+.summary {
+  font-family: nyt-imperial, georgia, "times new roman", times, serif;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.375rem;
+  margin-bottom: 0;
+  @media (min-width: 765px) {
+    display: none;
+  }
+  @media (min-width: 1020px) {
+    display: block;
+  }
+}
+
+.byline {
+  color: var(--content-subtle, #727272);
+  display: flex;
+  font-family: nyt-franklin, helvetica, arial, sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 0.75rem;
+  margin-top: 5px;
+}
+.bullet {
+  background-color: var(--content-subtle, #727272);
+  border-radius: 1px;
+  display: inline-block;
+  height: 2px;
+  width: 2px;
+  margin: 4px 5px 0;
+}
+
+/* -------------------- Figure/Main Photo -------------------- */
+.photo {
+  @media (min-width: 765px) {
+    display: none;
+  }
+}
+figcaption .byline {
+  justify-content: flex-end;
+}
