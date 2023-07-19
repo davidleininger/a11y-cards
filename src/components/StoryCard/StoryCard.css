@@ -1,32 +1,67 @@
-/* -------------------- Story Group -------------------- */
-.story + .story {
-  border-top: 1px solid var(--stroke, #ccc);
-  margin-top: var(--gap, 24px);
-  padding-top: var(--gap, 24px);
+/* -------------------- Container -------------------- */
+.story {
+  container-type: inline-size;
+  container-name: story;
+  + .story {
+    border-top: 1px solid var(--stroke, #ccc);
+    margin-top: var(--gap, 24px);
+    padding-top: var(--gap, 24px);
+  }
 }
 
 /* -------------------- Card Contents -------------------- */
 .card {
   display: flex;
+  /* reverse to show the image first changing this order is fine for accessibility because it's not messing with the order of focusable elements */
   flex-direction: column-reverse;
   position: relative;
 }
-.card-content {
+.featured {
   @media (min-width: 765px) {
+    .card-content {
+      margin: 1rem auto;
+      max-width: 70%;
+      text-align: center;
+    }
+    .byline {
+      justify-content: center;
+    }
+  }
+}
+.card-content {
+  margin-top: 0.5rem; /* for when there is no image byline */
+  &::before {
     /* float image placeholder */
+    content: "";
+    clear: right;
+    display: none;
+    float: right;
+    height: 75px;
+    margin: 0 0 5px 15px;
+    width: 75px;
+  }
+  &::after {
+    content: "";
+    clear: both;
+    display: none;
+  }
+  @media (min-width: 765px) {
+    @container story (min-width: 250px) {
+      margin-top: 0; /* for when there is a image byline */
+      &::before {
+        display: block;
+      }
+      &::after {
+        display: table;
+      }
+    }
+  }
+  @container story (min-width: 400px) {
     &::before {
-      content: "";
-      clear: right;
-      display: block;
-      float: right;
-      height: 75px;
-      margin: 0 0 5px 15px;
-      width: 75px;
+      display: none;
     }
     &::after {
-      content: "";
-      clear: both;
-      display: table;
+      display: none;
     }
   }
 }
@@ -34,9 +69,11 @@
   font-feature-settings: "kern";
   font-family: nyt-cheltenham, georgia, "times new roman", times, serif;
   font-size: 1.4375rem;
+  /* font-size: clamp(1.00rem, calc(0.41rem + 2.78cqi), 1.63rem); */
   font-weight: 700;
-  line-height: 1.6875rem;
+  line-height: 1.3;
   margin-bottom: 7px;
+  text-wrap: balance;
   & a {
     color: var(--content-base, #121212);
     text-decoration: none;
@@ -50,60 +87,68 @@
     position: absolute;
   }
 }
-
 /* if the summary is visible, the title should be a heading */
+/* if the headingLevel is the title should be text */
 .title.heading {
-  display: block;
-  @media (min-width: 765px) {
-    display: none;
-  }
-  @media (min-width: 1020px) {
+  display: none;
+  @container story (min-width: 340px) {
     display: block;
   }
 }
 .title.text {
-  display: none;
-  @media (min-width: 765px) {
-    display: block;
-  }
-  @media (min-width: 1020px) {
+  display: block;
+  @container story (min-width: 340px) {
     display: none;
   }
+}
+.no-heading .title.text {
+  display: block;
 }
 
 .thumbnail {
   display: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
   @media (min-width: 765px) {
-    display: block;
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: -1;
+    @container story (min-width: 250px) {
+      display: block;
+    }
+  }
+  @container story (min-width: 400px) {
+    display: none;
   }
 }
 
 .summary {
+  display: none;
   font-family: nyt-imperial, georgia, "times new roman", times, serif;
   font-size: 0.9375rem;
   font-weight: 500;
   line-height: 1.375rem;
   margin-bottom: 0;
-  @media (min-width: 765px) {
-    display: none;
-  }
-  @media (min-width: 1020px) {
+  @container story (min-width: 340px) {
     display: block;
   }
 }
 
 .byline {
   color: var(--content-subtle, #727272);
-  display: flex;
+  display: none;
   font-family: nyt-franklin, helvetica, arial, sans-serif;
   font-size: 0.6875rem;
   font-weight: 500;
   line-height: 0.75rem;
   margin-top: 5px;
+  @container story (min-width: 340px) {
+    display: flex;
+  }
+  @media (min-width: 765px) {
+    @container story (min-width: 250px) {
+      display: flex;
+    }
+  }
 }
 .bullet {
   background-color: var(--content-subtle, #727272);
@@ -115,11 +160,34 @@
 }
 
 /* -------------------- Figure/Main Photo -------------------- */
-.photo {
+.hero {
+  display: block;
   @media (min-width: 765px) {
-    display: none;
+    @container story (min-width: 250px) {
+      display: none;
+    }
+  }
+  @container story (min-width: 400px) {
+    display: block;
+  }
+  & figcaption .byline {
+    justify-content: flex-end;
   }
 }
-figcaption .byline {
-  justify-content: flex-end;
+.support {
+  @container story (min-width: 500px) {
+    .card {
+      flex-direction: row;
+      gap: var(--gap, 24px);
+    }
+    .card-content {
+      flex-basis: 60%;
+    }
+    .hero {
+      flex-basis: 40%;
+    }
+  }
+  .hero {
+    display: block;
+  }
 }

@@ -1,19 +1,19 @@
-import "./CQStoryCard.css";
-// import "./StoryCard.css";
+import "./StoryCard.css";
 import PropTypes from "prop-types";
 
 function StoryCard({ as: Element, type, headingLevel, ...props }) {
-  const Heading = `h${headingLevel}`;
+  const Heading = headingLevel ? `h${headingLevel}` : "p";
 
   return (
-    <Element className={`story ${type}`}>
+    <Element className={`story ${type} ${!headingLevel ? "no-heading" : ""}`}>
       <div className="card">
         <div className="card-content">
-          <Heading className="title heading">
-            <a href="/2023/04/03/sports/ncaabasketball/uconn-wins-championship.html">
-              UConn Wins Fifth N.C.A.A. Title
-            </a>
-          </Heading>
+          {headingLevel &&
+            <Heading className="title heading">
+              <a href="/2023/04/03/sports/ncaabasketball/uconn-wins-championship.html">
+                UConn Wins Fifth N.C.A.A. Title
+              </a>
+            </Heading>}
           <p className="title text">
             <a href="/2023/04/03/sports/ncaabasketball/uconn-wins-championship.html">
               UConn Wins Fifth N.C.A.A. Title
@@ -39,7 +39,7 @@ function StoryCard({ as: Element, type, headingLevel, ...props }) {
           </p>
         </div>
 
-        <figure className="photo" role="group">
+        <figure className="hero" role="group">
           <div>
             <img
               src="https://static01.nyt.com/images/2023/05/03/multimedia/03mcbb-final-gamer-tqhv/03mcbb-final-gamer-tqhv-threeByTwoMediumAt2X.jpg"
@@ -61,11 +61,13 @@ function StoryCard({ as: Element, type, headingLevel, ...props }) {
 
 StoryCard.propTypes = {
   as: PropTypes.elementType,
-  headingLevel: PropTypes.oneOf([2, 3, 4, 5, 6]).isRequired
+  headingLevel: PropTypes.oneOf([2, 3, 4, 5, 6, null]),
+  type: PropTypes.oneOf(["default", "featured", "support"])
 };
 
 StoryCard.defaultProps = {
-  as: "article"
+  as: "article",
+  headingLevel: null
 };
 
 export default StoryCard;
