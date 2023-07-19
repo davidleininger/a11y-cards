@@ -1,0 +1,21 @@
+{
+  "version": 1.1,
+  "$schema": "https://raw.githubusercontent.com/microsoft/vscode-css-languageservice/master/docs/customData.schema.json",
+  "atDirectives": [],
+  "properties": [
+    {
+      "name": "text-wrap",
+      "description": {
+        "kind": "markdown",
+        "value": "The **text-wrap** CSS property is used to define how type should wrap to additional lines."
+      },
+      "references": [
+        {
+          "name": "MDN reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/text-wrap"
+        }
+      ],
+      "browsers": ["E105", "C105", "O91"]
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 {
   "css.customData": [
-   "./.vscode/css-container-custom-data.json"
+   "./.vscode/css-container-custom-data.json", "./.vscode/text-warp-custom-data.json"
   ],
 }
