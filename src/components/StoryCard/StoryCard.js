@@ -3,9 +3,12 @@ import PropTypes from "prop-types";
 
 function StoryCard({ as: Element, type, headingLevel, ...props }) {
   const Heading = headingLevel ? `h${headingLevel}` : "p";
+  const cardClass = type ? `story ${type}` : "story";
 
   return (
-    <Element className={`story ${type} ${!headingLevel ? "no-heading" : ""}`}>
+    <Element
+      className={`story ${cardClass} ${!headingLevel ? "no-heading" : ""}`}
+    >
       <div className="card">
         <div className="card-content">
           {headingLevel &&

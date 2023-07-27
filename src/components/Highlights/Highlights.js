@@ -1,40 +1,15 @@
-import { useRef, useEffect } from "react";
 import "./Highlights.css";
 import StoryCard from "../StoryCard";
 
 function Highlights() {
-  const col1Ref = useRef();
-  const col2Ref = useRef();
-
-  useEffect(() => {
-    const observer = new ResizeObserver(() => {
-      col1Ref.current.setAttribute(
-        "data-size",
-        col1Ref.current.clientWidth - 32
-      );
-      col2Ref.current.setAttribute(
-        "data-size",
-        col2Ref.current.clientWidth - 32
-      );
-    });
-
-    observer.observe(col1Ref.current);
-    observer.observe(col2Ref.current);
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-
   return (
     <div className="hl-wrapper">
       <h2 className="visually-hidden">Highlights</h2>
-      <div ref={col1Ref} className="col col1">
-        <StoryCard type="featured" headingLevel={3} />
-      </div>
-      <div ref={col2Ref} className="col col2">
+      <div>
         {/* No redundant rules makes sense, but role list is needed if you set list-style: none; */}
         {/* eslint-disable-next-line */}
-        <ul role="list">
+        <ul role="list" className="hightlights">
+          <StoryCard as="li" type="featured" headingLevel={3} />
           <StoryCard as="li" headingLevel={3} />
           <StoryCard as="li" headingLevel={3} />
           <StoryCard as="li" headingLevel={3} />

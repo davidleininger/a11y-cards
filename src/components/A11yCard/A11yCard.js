@@ -2,8 +2,9 @@ import "./A11yCard.css";
 
 function A11yCard({ as: Element = "article", type, headingLevel }) {
   const Heading = headingLevel ? `h${headingLevel}` : "p";
+  const cardClass = type ? `story ${type}` : "story";
   return (
-    <Element className={`story ${type}`}>
+    <Element className={`${cardClass}`}>
       <div className="card">
         <div className="card-content">
           <Heading className="title heading">

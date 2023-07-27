@@ -2,28 +2,32 @@ h1 + * {
   font-family: nyt-cheltenham, georgia, "times new roman", times, serif;
   margin-top: var(--gap, 24px);
 }
-.hl-wrapper {
+.hl-wrapper ul.hightlights {
   display: grid;
   gap: var(--gap, 24px);
   grid-template-columns: 1fr;
+  margin-bottom: var(--gap, 24px);
 }
-.col + .col {
-  border-top: 1px solid var(--stroke, #ccc);
-  padding-top: var(--gap, 24px);
+.hl-wrapper ul.hightlights > li:first-of-type {
+  grid-row: 1 / -1;
+  border-right: 1px solid var(--stroke, #ccc);
+  border-top: none;
+  padding-right: var(--gap, 24px);
+  padding-top: 0;
 }
 @media (min-width: 765px) {
-  .hl-wrapper {
+  .hl-wrapper ul.hightlights {
     grid-template-columns: 3fr 2fr;
-  }
-  .col + .col {
-    border-left: 1px solid var(--stroke, #ccc);
-    border-top: none;
-    padding-left: var(--gap, 24px);
-    padding-top: 0;
+    grid-template-rows: auto auto auto;
+    .story:nth-child(2) {
+      border-top: none;
+      margin-top: 0;
+      padding-top: 0;
+    }
   }
 }
 @media (min-width: 1024px) {
-  .hl-wrapper {
+  .hl-wrapper ul.hightlights {
     grid-template-columns: 4fr 2fr;
   }
 }
