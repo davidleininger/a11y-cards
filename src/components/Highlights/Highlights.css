@@ -8,14 +8,14 @@ h1 + * {
   grid-template-columns: 1fr;
   margin-bottom: var(--gap, 24px);
 }
-.hl-wrapper ul.hightlights > li:first-of-type {
-  grid-row: 1 / -1;
-  border-right: 1px solid var(--stroke, #ccc);
-  border-top: none;
-  padding-right: var(--gap, 24px);
-  padding-top: 0;
-}
 @media (min-width: 765px) {
+  .hl-wrapper ul.hightlights > li:first-of-type {
+    grid-row: 1 / -1;
+    border-right: 1px solid var(--stroke, #ccc);
+    border-top: none;
+    padding-right: var(--gap, 24px);
+    padding-top: 0;
+  }
   .hl-wrapper ul.hightlights {
     grid-template-columns: 3fr 2fr;
     grid-template-rows: auto auto auto;
